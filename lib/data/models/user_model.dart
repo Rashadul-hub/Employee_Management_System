@@ -20,9 +20,12 @@ class UserModel {
   String? get token => _token;
 
   Map<String, dynamic> toJson() {
-
-    final map = <String, dynamic>{};
-    map['token'] = _token;
-    return map;
+    return {'token': _token};
   }
+  // Map<String, dynamic> toJson() {
+  //
+  //   final map = <String, dynamic>{};
+  //   map['token'] = _token;
+  //   return map;
+  // }
 }

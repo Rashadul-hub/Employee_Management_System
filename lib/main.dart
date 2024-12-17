@@ -12,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -21,15 +20,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UserViewModel()),
       ],
       child: Builder(builder: (BuildContext context) {
+        /// Check login status when the app starts
+        // final authViewModel = Provider.of<AuthViewModel>(context);
+        // authViewModel.checkLoginStatus(context);
+        // Delay the navigation until the widget is fully initialized
+
+
         return MaterialApp(
-// title: 'Flutter Demo',
-// debugShowCheckedModeBanner: false,
-// theme: ThemeData(
-//
-//   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-//   useMaterial3: true,
-// ),
-// home: const SplashView(),
           debugShowCheckedModeBanner: false,
           initialRoute: RoutesName.splash,
           onGenerateRoute: Routes.generateRoute,

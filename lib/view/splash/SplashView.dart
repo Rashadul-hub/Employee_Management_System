@@ -41,7 +41,6 @@ class _SplashViewState extends State<SplashView> {
                       child: Image.asset(
                         "images/iubat_cse-logo.png",
                       ),
-                      // child:  Image.asset("images/splashimg.png",),
                     ),
                     Text(
                       "Attendly",
