@@ -37,11 +37,9 @@ class _SplashViewState extends State<SplashView> {
                     Container(
                       height: screenHeight * 0.9,
                       width: screenWidth * 0.5,
-                      // color: Colors.red,
-                      child: Image.asset(
+                       child: Image.asset(
                         "images/iubat_cse-logo.png",
                       ),
-                      // child:  Image.asset("images/splashimg.png",),
                     ),
                     Text(
                       "Attendly",

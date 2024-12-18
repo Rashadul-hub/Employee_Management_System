@@ -6,26 +6,31 @@ import 'package:flutter/cupertino.dart';
 
 class UserViewModel with ChangeNotifier {
 
+  String? _token;
+  String? get token => _token;
 
+
+  /// Save user data (using Token)
   Future<bool> saveUser(UserModel user)async{
 
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-    sharedPreferences.setString('token', user.token.toString());
+    await sharedPreferences.setString('token', user.token.toString());
+    _token = user.token;
     notifyListeners();
-
     return true;
   }
 
-
+  /// Load Saved user data token
   Future<UserModel> getUser()async{
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
     final String? getToken = sharedPreferences.getString('token');
-
-    return UserModel(
-        token: getToken.toString()
-    );
+    if(getToken != null && getToken.isNotEmpty){
+      _token = getToken;
+      notifyListeners();
+      return UserModel(token: getToken);
+    }else{
+      return UserModel(token: '');
+    }
 
   }
 
@@ -33,6 +38,9 @@ class UserViewModel with ChangeNotifier {
   Future<bool> remove()async{
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.remove('token');
+    _token = null;
+    notifyListeners();
+
     return true;
   }
 }
