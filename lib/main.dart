@@ -1,6 +1,7 @@
 import 'package:cse_department/routes/routes.dart';
 import 'package:cse_department/routes/routes_name.dart';
 import 'package:cse_department/view_models/authViewmodel.dart';
+import 'package:cse_department/view_models/dashboardViewModel.dart';
 import 'package:cse_department/view_models/userViewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,14 +19,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
         ChangeNotifierProvider(create: (_) => UserViewModel()),
+        ChangeNotifierProvider(create: (_) => DashboardViewModel()),
       ],
       child: Builder(builder: (BuildContext context) {
-        /// Check login status when the app starts
-        // final authViewModel = Provider.of<AuthViewModel>(context);
-        // authViewModel.checkLoginStatus(context);
-        // Delay the navigation until the widget is fully initialized
-
-
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: RoutesName.splash,

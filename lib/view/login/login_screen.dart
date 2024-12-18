@@ -85,6 +85,7 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
+                      /// Input User's Email
                       child: TextFormField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -126,6 +127,7 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
+                                  /// Input User's Password
                                   child: TextFormField(
                                     controller: _passwordController,
                                     obscureText: _obsecurePassword.value,
@@ -134,13 +136,11 @@ class _LoginViewState extends State<LoginView> {
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: 'Password',
-                                      // labelText: 'Password',
-                                      hintStyle: TextStyle(
+                                       hintStyle: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400),
-                                      // labelStyle: TextStyle(color: Colors.black,fontSize: 15),
-                                      contentPadding: EdgeInsets.symmetric(
+                                       contentPadding: EdgeInsets.symmetric(
                                           vertical: 15.0, horizontal: 12.0),
                                       prefixIcon: Icon(
                                         Icons.lock_open_rounded,
@@ -164,6 +164,7 @@ class _LoginViewState extends State<LoginView> {
                                 SizedBox(
                                   height: screenHeight * 0.02,
                                 ),
+                                /// Forget Password section
                                 Container(
                                   width: screenWidth * 0.95,
                                   // color:Colors.blueAccent,
@@ -192,6 +193,8 @@ class _LoginViewState extends State<LoginView> {
                     SizedBox(
                       height: screenHeight * 0.02,
                     ),
+
+                    /// Login Button
                     RoundButtonLogo(
                       title: 'Login',
                       loading: authViewMode.loading,
