@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../view/dashboard/main_dashboard.dart';
+
 class DashboardViewModel extends ChangeNotifier {
-  Widget _currentScreen = const Center(
-    child: Text(
-      'Welcome to Admin Dashboard!',
-      style: TextStyle(fontSize: 18),
-    ),
-  );
+  Widget _currentScreen = const MainDashboard();
 
   String _appBarTitle = "Dashboard";
 

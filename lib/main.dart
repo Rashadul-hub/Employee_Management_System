@@ -5,9 +5,12 @@ import 'package:cse_department/view_models/dashboardViewModel.dart';
 import 'package:cse_department/view_models/userViewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/standalone.dart' as tz;
+import 'package:geolocator/geolocator.dart';
 
-void main() {
-  runApp(const MyApp());
+void main()  {
+    runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
