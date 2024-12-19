@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
  import 'package:shared_preferences/shared_preferences.dart';
 
 
-class UserViewModel with ChangeNotifier {
+class UserProvider with ChangeNotifier {
 
   String? _token;
   String? get token => _token;

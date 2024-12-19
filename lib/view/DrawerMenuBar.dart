@@ -1,3 +1,4 @@
+import 'package:cse_department/data/services/notify_helper_services.dart';
 import 'package:cse_department/res/color/app_colors.dart';
 import 'package:cse_department/routes/routes_name.dart';
 import 'package:cse_department/view/dashboard/get_userLists.dart';
@@ -10,6 +11,7 @@ import 'package:cse_department/view/dashboard/thesis_page.dart';
 import 'package:cse_department/view/dashboard/todo_page.dart';
 import 'package:cse_department/view_models/dashboardViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../view_models/userViewmodel.dart';
@@ -22,14 +24,28 @@ class AdminDashboard extends StatefulWidget {
 }
 
 class _AdminDashboardState extends State<AdminDashboard> {
+  var notifyHelper;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    notifyHelper = NotifyHelper();
+    notifyHelper.initializeNotification();
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    final userPreferences = Provider.of<UserViewModel>(context);
+    final userPreferences = Provider.of<UserProvider>(context);
+
+
+
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Consumer<DashboardViewModel>(
+        title: Consumer<DashboardProvider>(
           builder: (context, dashboardProvider, child) {
             return Text(dashboardProvider.appBarTitle);
           },
@@ -52,7 +68,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                      GestureDetector(
                        onTap: () {
                          // Navigate back to the dashboard screen
-                         Provider.of<DashboardViewModel>(context, listen: false)
+                         Provider.of<DashboardProvider>(context, listen: false)
                              .changeScreen(MainDashboard(), "Dashboard");
                          Navigator.pop(context); /// Close the drawer
                        },
@@ -87,9 +103,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
               title: const Text('Users'),
               onTap: () {
                 /// navigate to get user list's Page
-                Provider.of<DashboardViewModel>(context, listen: false)
-                    .changeScreen(GetUserlists(), "Users");
+                Provider.of<DashboardProvider>(context, listen: false).changeScreen(GetUserlists(), "Users");
                 Navigator.pop(context);
+                notifyHelper.displayNotification(title: "User Tab Clicked", body: "Activated User Detail Screen");
 
                 /// Close the drawer
               },
@@ -99,7 +115,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               title: const Text('Meeting'),
               onTap: () {
                 // navigate to get Meetings Page
-                Provider.of<DashboardViewModel>(context, listen: false)
+                Provider.of<DashboardProvider>(context, listen: false)
                     .changeScreen(MeetingPage(), "Meetings");
                 Navigator.pop(context);
               },
@@ -109,7 +125,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               title: const Text('Tasks'),
               onTap: () {
                 // navigate to get Tasks Page
-                Provider.of<DashboardViewModel>(context, listen: false)
+                Provider.of<DashboardProvider>(context, listen: false)
                     .changeScreen(TaskPage(), "Tasks");
                 Navigator.pop(context);
               },
@@ -119,7 +135,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               title: const Text('TODO'),
               onTap: () {
                 // navigate to get Todo_Page
-                Provider.of<DashboardViewModel>(context, listen: false)
+                Provider.of<DashboardProvider>(context, listen: false)
                     .changeScreen(TodoPage(), "TODO");
                 Navigator.pop(context);
               },
@@ -129,7 +145,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               title: const Text('Notes'),
               onTap: () {
                 // navigate to get Note Page
-                Provider.of<DashboardViewModel>(context, listen: false)
+                Provider.of<DashboardProvider>(context, listen: false)
                     .changeScreen(NotesPage(), "Notes");
                 Navigator.pop(context);
               },
@@ -139,7 +155,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               title: const Text('OBE'),
               onTap: () {
                 // navigate to get OBE Page
-                Provider.of<DashboardViewModel>(context, listen: false)
+                Provider.of<DashboardProvider>(context, listen: false)
                     .changeScreen(ObePage(), "OBE");
                 Navigator.pop(context);
               },
@@ -149,7 +165,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               title: const Text('Thesis'),
               onTap: () {
                 // navigate to get Thesis Page
-                Provider.of<DashboardViewModel>(context, listen: false)
+                Provider.of<DashboardProvider>(context, listen: false)
                     .changeScreen(ThesisPage(), "Thesis/Practicum");
                 Navigator.pop(context);
               },
@@ -167,7 +183,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
           ],
         ),
       ),
-      body: Consumer<DashboardViewModel>(
+      body: Consumer<DashboardProvider>(
           builder: (context, dashboardProvider, child) {
         return dashboardProvider.currentScreen;
       }),

@@ -12,7 +12,7 @@ import '../utils/toast_utils.dart';
 
 class AuthViewModel with ChangeNotifier {
   final _myRepo = AuthRepository();
-  final UserViewModel userPreference = UserViewModel();
+  final UserProvider userPreference = UserProvider();
 
   /// Access UserViewModel
 
@@ -47,7 +47,7 @@ class AuthViewModel with ChangeNotifier {
       setLoading(false);
       print("Response: $value"); // Debug log
 
-      final userPreference = Provider.of<UserViewModel>(context, listen: false);
+      final userPreference = Provider.of<UserProvider>(context, listen: false);
 
       userPreference.saveUser(
         UserModel(token: value['token'].toString()),
@@ -74,7 +74,7 @@ class AuthViewModel with ChangeNotifier {
 
 
   Future<void> logout(BuildContext context) async {
-    final userPreference = Provider.of<UserViewModel>(context, listen: false);
+    final userPreference = Provider.of<UserProvider>(context, listen: false);
     await userPreference.remove(); // Remove token from SharedPreferences
 
     Navigator.pushReplacement(

@@ -1,16 +1,42 @@
+import 'dart:io';
+
+import 'package:cse_department/res/color/app_colors.dart';
 import 'package:cse_department/routes/routes.dart';
 import 'package:cse_department/routes/routes_name.dart';
 import 'package:cse_department/view_models/authViewmodel.dart';
 import 'package:cse_department/view_models/dashboardViewModel.dart';
+import 'package:cse_department/view_models/userListViewModel.dart';
 import 'package:cse_department/view_models/userViewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/standalone.dart' as tz;
-import 'package:geolocator/geolocator.dart';
 
-void main()  {
-    runApp(const MyApp());
+
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  HttpOverrides.global = MyHttpOverrides();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: AppColors.navColor,
+    statusBarColor: AppColors.navColor,
+  ));
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation .portraitDown,
+  ]);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,8 +47,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
-        ChangeNotifierProvider(create: (_) => UserViewModel()),
-        ChangeNotifierProvider(create: (_) => DashboardViewModel()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => DashboardProvider()),
+        ChangeNotifierProvider(create: (_) => UserListProvider()),
       ],
       child: Builder(builder: (BuildContext context) {
         return MaterialApp(

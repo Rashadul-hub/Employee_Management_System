@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../view/dashboard/main_dashboard.dart';
 
-class DashboardViewModel extends ChangeNotifier {
+class DashboardProvider extends ChangeNotifier {
   Widget _currentScreen = const MainDashboard();
 
   String _appBarTitle = "Dashboard";

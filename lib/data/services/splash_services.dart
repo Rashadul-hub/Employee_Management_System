@@ -7,7 +7,7 @@ import '../models/user_model.dart';
 
 class SplashServices {
 
-  Future<UserModel> getUserData() => UserViewModel().getUser();
+  Future<UserModel> getUserData() => UserProvider().getUser();
   Future<void> checkAuthentication(BuildContext context) async {
     try {
       final userData = await getUserData();
